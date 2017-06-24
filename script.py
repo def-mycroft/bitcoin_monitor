@@ -1,7 +1,9 @@
+import os
 import urllib
 import json 
 import smtplib
 from email.mime.text import MIMEText
+import time
 
 
 def get_data():
@@ -23,8 +25,10 @@ def send_email(message, to_address):
 
 
 def send_alert_message():
+    os.environ['TZ'] = 'US/Central'
+    time.tzset() # Set the time zone. Won't work in Windows
+    current_time = time.strftime('%H:%M', time.localtime())
     price = get_data()['last']
-    message = "BTC Price Alert! Last: %s" % price
+    message = "BTC Price Alert! Last: %s. Time: %s" % (price, current_time)
     send_email(message, '6205068151@messaging.sprintpcs.com')
-
 
