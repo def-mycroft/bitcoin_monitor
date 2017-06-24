@@ -1,6 +1,7 @@
 import urllib
 import json 
 import smtplib
+from email.mime.text import MIMEText
 
 
 def get_data():
@@ -10,13 +11,19 @@ def get_data():
     data = json.loads(response.read())['USD']
     return data
 
-def send_email():
+
+def send_email(message, to_address):
+    """Sends an email"""
     sender_address = 'merc.test101@gmail.com'
-    to_address = 'dasenbrockjw@gmail.com'
-    msg = 'here is a message'
     server = smtplib.SMTP("smtp.gmail.com:587")
     server.starttls()
-    server.login('merc.test101@gmail.com', 'kuc6zest')
-    server.sendmail(sender_address, to_address, msg)
+    server.login(sender_address, 'kuc6zest')
+    server.sendmail(sender_address, to_address, message)
+
+
+def send_alert_message():
+    price = get_data()['last']
+    message = "BTC Price Alert! Last: %s" % price
+    send_email(message, 'dasenbrockjw@gmail.com')
 
 
