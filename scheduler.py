@@ -7,7 +7,7 @@ while True:
 
     alert_functions.send_alert_message()
 
-    dt = datetime.now() + timedelta(seconds=8)
+    dt = datetime.now() + timedelta(hours=3)
 
     while datetime.now() < dt:
         time.sleep(1)
