@@ -15,15 +15,16 @@ def get_data():
 def send_email(message, to_address):
     """Sends an email"""
     sender_address = 'merc.test101@gmail.com'
+    message = MIMEText(message)
     server = smtplib.SMTP("smtp.gmail.com:587")
     server.starttls()
     server.login(sender_address, 'kuc6zest')
-    server.sendmail(sender_address, to_address, message)
+    server.sendmail(sender_address, to_address, message.as_string())
 
 
 def send_alert_message():
     price = get_data()['last']
     message = "BTC Price Alert! Last: %s" % price
-    send_email(message, 'dasenbrockjw@gmail.com')
+    send_email(message, '6205068151@messaging.sprintpcs.com')
 
 
