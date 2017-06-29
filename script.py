@@ -20,7 +20,7 @@ def send_email(message, to_address):
     message = MIMEText(message)
     server = smtplib.SMTP("smtp.gmail.com:587")
     server.starttls()
-    server.login(sender_address, 'kuc6zest')
+    server.login(sender_address, 'password')
     server.sendmail(sender_address, to_address, message.as_string())
 
 
